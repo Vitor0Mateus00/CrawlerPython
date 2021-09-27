@@ -1,0 +1,11 @@
+FROM python:3.9
+
+ADD PythonCrawler.py .
+
+RUN pip install requests beautifulsoup4
+
+CMD ["python", "./PythonCrawler.py"]
+
+#COMMANDS
+#docker build -t python-name .
+#docker run -t -i python-name
