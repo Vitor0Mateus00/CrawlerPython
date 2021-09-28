@@ -31,9 +31,7 @@
         "28": "Agenda de Coordenadores (CCTV",
         "29": "Agenda de Coordenadores (CCTV",
         "30": "Agenda de Coordenadores (CCTV",
-        "31": "Agenda de Coordenadores (CCTV",
-        "32": "Agenda de Coordenadores (CCTV",
-        "33": "Agenda de Coordenadores (CCTV"
+        "31": "Agenda de Coordenadores (CCTV"
     },
     "Authority Name\/Occupation": {
         "0": "Christianne Dias (Diretora-Presidente)",
@@ -65,11 +63,9 @@
         "26": "Gisela Damm Foratini\u00a0(Assessora Internacional)",
         "27": "Gisela Damm Foratini\u00a0(Assessora Internacional)",
         "28": "Fernando Roberto de Oliveira (Coordenador de \u00c1guas Subterr\u00e2neas)",
-        "29": "Fernando Roberto de Oliveira (Coordenador de \u00c1guas Subterr\u00e2neas)",
+        "29": "Henrique Pinheiro Veiga (Coordenador de conserva\u00e7\u00e3o de \u00e1gua e solo)",
         "30": "Henrique Pinheiro Veiga (Coordenador de conserva\u00e7\u00e3o de \u00e1gua e solo)",
-        "31": "Henrique Pinheiro Veiga (Coordenador de conserva\u00e7\u00e3o de \u00e1gua e solo)",
-        "32": "Ivja Neves Rabelo Machado (Coordenadora de Correi\u00e7\u00e3o e Investiga\u00e7\u00e3o Funcional)",
-        "33": "M\u00e1rcia Regina Silva Cerqueira (Coordenadora da \u00c1rea de Planejamento)"
+        "31": "M\u00e1rcia Regina Silva Cerqueira (Coordenadora da \u00c1rea de Planejamento)"
     },
     "Date": {
         "0": "2021-09-28",
@@ -100,12 +96,10 @@
         "25": "2021-09-28",
         "26": "2021-09-28",
         "27": "2021-09-28",
-        "28": "2021-09-27",
-        "29": "2021-09-27",
+        "28": "2021-09-28",
+        "29": "2021-09-28",
         "30": "2021-09-28",
-        "31": "2021-09-28",
-        "32": "2021-09-27",
-        "33": "2021-09-27"
+        "31": "2021-09-27"
     },
     "Hour": {
         "0": "09h00 - 10h00",
@@ -136,12 +130,10 @@
         "25": "00h00",
         "26": "08h00",
         "27": "14h00",
-        "28": "15h00 - 16h00",
-        "29": "17h00 - 18h00",
-        "30": "14h00 - 15h00",
-        "31": "16h00 - 17h00",
-        "32": "09h00",
-        "33": "09h00 - 10h00"
+        "28": "09h00 - 12h00",
+        "29": "14h00 - 15h00",
+        "30": "16h00 - 17h00",
+        "31": "09h00 - 10h00"
     },
     "Appointment Place": {
         "0": "Gabinete AA",
@@ -175,8 +167,6 @@
         "28": "Microsoft Teams",
         "29": "Microsoft Teams",
         "30": "Microsoft Teams",
-        "31": "Microsoft Teams",
-        "32": "Trabalho Remoto",
-        "33": "Teams"
+        "31": "Teams"
     }
 }
