@@ -283,7 +283,7 @@ if(create_json) == True:
     with open('StructuredDictList' + date + '.json', "w") as outfile:
         json.dump(structured_dict_list, outfile, ensure_ascii=True)
 
-# MongoDB Dump Section
+# MongoDB Section
 #----------------------------------------------------------------------------------------------------------------------
 
 
