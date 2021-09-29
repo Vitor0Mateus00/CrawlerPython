@@ -23,4 +23,7 @@ Instructions:
 Commands: 
 
     docker build -t python-crawler .   (Command to build a docker image)
-    docker run -t -i python-crawler    (Command to run the docker image created)      
+    docker run -t -i python-crawler    (Command to run the docker image created)   
+    
+    
+(FOR STUDYING PURPOSES ONLY!)
