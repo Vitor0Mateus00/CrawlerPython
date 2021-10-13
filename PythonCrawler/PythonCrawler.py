@@ -3,6 +3,10 @@
 #----------------------------------------------------------------------------------------------------------------------
 
 #
+#
+from datetime import date
+
+#
 # Usei "json" para "despejar" a saída do respectivo script em arquivo .json.
 import json
 
@@ -13,6 +17,7 @@ import unicodedata
 # We use the "bs4" feature to transform our html into a beautifulsoup object.
 # Usamos o recurso "bs4" para podermos transformar / "parsear" html's em objetos "beautifulsoup".
 from bs4 import BeautifulSoup
+from numpy import empty
 
 # "pandas" will help us organize our data list.
 # "pandas" nos ajudará a estruturar nossas listas de dados .
@@ -69,6 +74,8 @@ create_json = False
 
 create_mongodb_lib = False
 
+appointment_date = date.today()
+
 # Criação de arquivos .html nesta pasta para visualização offline das urls acessadas (a ser implementada).
 #create_offline_view_url_list = False
 
@@ -82,14 +89,19 @@ print('Crawler Process Initialized!!! \n')
 wizard_guide = input('Would you like to START? [y/n]\n')
 print('\n')
 
-if(wizard_guide == "n"):
+if(wizard_guide == "y"):
+    print('Command Accepted!!!\n')
+    print('\n')    
+
+elif(wizard_guide == "n"):
     print('Canceling Crawler Process...\n')
     print('\n')
-    wizard_terminate()
+    wizard_terminate()   
 
-if(wizard_guide is None):
+elif(wizard_guide != "y" or wizard_guide != "n"):
     print('Invalid Command!!! \n')
     wizard_terminate()    
+
 
 wizard_guide = input('Would you like to create .json files? [y/n]\n')
 print('\n')
@@ -104,9 +116,9 @@ elif(wizard_guide == "n"):
     print('No json file will be created!!!\n')
     print('\n')  
 
-elif(wizard_guide is not None):
+elif(wizard_guide != "y" or wizard_guide != "n"):
     print('Invalid Command!!! \n')
-    wizard_terminate()
+    wizard_terminate()   
 
 
 print('Acquiring Necessary Data...\nThis May Take a While...')
@@ -193,11 +205,14 @@ for new_url in urls_found_list:
                 # Dentro do site objetificado do agente, o "crawler" retornará informações básicas.
                 for new_agent_appointment in agent_appointment_found_list:                    
 
-                    # Guarda nesta variável a estrutura "crua" onde está a informação da "data de hoje".
-                    agent_appointment_date = new_agent_appointment.find('li', attrs={'class': 'day is-selected has-appointment'})                     
+                    # # Guarda nesta variável a estrutura "crua" onde está a informação da "data de hoje".
+                    # agent_appointment_date = new_agent_appointment.find('li', attrs={'class': 'day is-selected has-appointment'})                     
 
                     # Lista os compromissos encontrados pelo "crawler".
-                    agent_appointment_data_list = new_agent_appointment.findAll('div', attrs={'class': 'item-compromisso'})                
+                    agent_appointment_data_list = new_agent_appointment.findAll('div', attrs={'class': 'item-compromisso'})                     
+
+                    if(len(agent_appointment_data_list) == 0):
+                        print("\nThere is no Appointment Today for " + agent_data + "\n")           
                               
                     # Para cada compromisso encontrado e listado, o "crawler" irá
                     # extrair os dados úteis que ali estão.
@@ -224,13 +239,10 @@ for new_url in urls_found_list:
 
                         # Se houver DATA de início da reunião, adiciona tal valor 
                         # ao parâmetro correspondente no dicionário.  
-                        if(agent_appointment_date) is not None:
+                        
                                                   
-                            structured_dict['Date'] = agent_appointment_date['data-day']   
-
-                        else:
-
-                            agent_appointment_date = ''  
+                        structured_dict['Date'] = str(appointment_date)  
+ 
                         
 
                         # Se houver HORA de início da reunião, adiciona tal valor 
@@ -251,12 +263,12 @@ for new_url in urls_found_list:
 
                             agent_appointment_place = special_char_cleanup(agent_appointment_place.text)
                             structured_dict['Appointment Place'] = agent_appointment_place                           
-                            structured_list.append([authority_data, agent_data, agent_appointment_date['data-day'], agent_appointment_hour, agent_appointment_place])                                                  
+                            structured_list.append([authority_data, agent_data, str(appointment_date) , agent_appointment_hour, agent_appointment_place])                                                  
                                                      
                         else: 
                             
                             structured_dict['Appointment Place'] = 'Not Declared' 
-                            structured_list.append([authority_data, agent_data, agent_appointment_date['data-day'], agent_appointment_hour, 'Not Declared'])                      
+                            structured_list.append([authority_data, agent_data, str(appointment_date) , agent_appointment_hour, 'Not Declared'])                      
 
 
                         # Adiciona uma cópia do dicionário após todas as informações
@@ -265,7 +277,7 @@ for new_url in urls_found_list:
                         structured_dict_list.append(structured_dict.copy())                        
 
                         # (test variable)
-                        date = agent_appointment_date['data-day'] 
+                        # date = agent_appointment_date['data-day'] 
 
                         # (hora da execução do "crawler" para compor o nome do arquivo .json)   
                         #hour = ...                                                                           
@@ -278,10 +290,12 @@ structured_table = pd.DataFrame(structured_list, columns=['Authority Type', 'Aut
 #----------------------------------------------------------------------------------------------------------------------
 if(create_json) == True:
 
-    structured_table.to_json('StructuredTable' + date + '.json')
+    
+    structured_table.to_json('StructuredTable' + str(appointment_date) + '.json')
 
-    with open('StructuredDictList' + date + '.json', "w") as outfile:
+    with open('StructuredDictList' + str(appointment_date) + '.json', "w") as outfile:
         json.dump(structured_dict_list, outfile, ensure_ascii=True)
+    
 
 # MongoDB Section
 #----------------------------------------------------------------------------------------------------------------------
